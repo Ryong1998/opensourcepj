@@ -1,7 +1,7 @@
 package practice5;
 
-abstract class Calculator {
-	//추상 매소드
+abstract class Calculator { //추상클래스는 객체 생성 불가능
+	//추상 매소드 선언
 	public abstract int add(int a, int b);
 	public abstract int subtract(int a, int b);
 	public abstract double average(int[] a);
