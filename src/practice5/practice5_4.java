@@ -1,32 +1,41 @@
 package practice5;
-
-
-class Person_4{} 
-class Student_4 extends Person_4 {} 
-class Researcher_4 extends Person_4 {} 
-class Professor_4 extends Researcher_4 {} 
-
-public class practice5_4 { 
-	static void print(Person_4 p) { 
-		if(p instanceof Person_4) //레퍼런스가 가리키는 객체의 타입 식별을 위해 사용
-			System.out.print("Person "); 
-		if(p instanceof Student_4) 
-			System.out.print("Student "); 
-		if(p instanceof Researcher_4) 
-			System.out.print("Researcher "); 
-		if(p instanceof Professor_4) 
-			System.out.print("Professor "); 
-		System.out.println(); 
-	} 
-	
-	public static void main(String[] args) { 
-		System.out.print("new Student_4() -> \t"); 
-		print(new Student_4()); 
-		System.out.print("new Researcher_4() -> \t"); 
-		print(new Researcher_4()); 
-		System.out.print("new Professor_4() -> \t"); 
-		print(new Professor_4()); 
-	}
+import java.util.Scanner;
+abstract class Converter {
+   abstract protected double convert(double src); // 추상 메소드
+   abstract protected String getSrcString(); // 추상 메소드
+   abstract protected String getDestString(); // 추상 메소드
+   protected double ratio; // 비율
+   public void run() {
+      Scanner scanner = new Scanner(System.in);
+      System.out.println(getSrcString()+"을 "+getDestString()+"로 바꿉니다.");
+      System.out.print(getSrcString()+"을 입력하세요>> ");
+      double val = scanner.nextDouble();
+      double res = convert(val);
+      System.out.println("변환 결과: "+res+getDestString()+"입니다");
+      scanner.close();
+   }
 }
 
+class Km2Mile extends Converter {
+	   public Km2Mile(double ratio) {
+		   this.ratio = ratio;
+	   }
+	   protected double convert(double src) { // 추상 메소드 구현
+		   return src/ratio;
+	   } 
+	   protected String getSrcString() { // 추상 메소드 구현
+		   return "Km"; 
+	   }  
+	   protected String getDestString() { // 추상 메소드 구현
+		   return "mile"; 
+	   }  
+	}
+public class practice5_4 {
 
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Km2Mile toMile = new Km2Mile(1.6); // 1마일은 1.6km
+		toMile.run();
+	}
+
+}
